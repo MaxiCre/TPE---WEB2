@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-09-2025 a las 16:31:37
+-- Tiempo de generación: 10-10-2025 a las 16:00:19
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,7 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categoria` (
   `id_categoria` int(11) NOT NULL,
-  `categoria` text NOT NULL
+  `categoria` text NOT NULL,
+  `orden` int(11) NOT NULL,
+  `activa` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -53,7 +55,8 @@ CREATE TABLE `noticia` (
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`id_categoria`);
+  ADD PRIMARY KEY (`id_categoria`),
+  ADD UNIQUE KEY `orden` (`orden`);
 
 --
 -- Indices de la tabla `noticia`
