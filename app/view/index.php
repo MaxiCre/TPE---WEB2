@@ -1,34 +1,49 @@
 <?php
-include 'data.php'; // Tus arrays $categorias y $noticias
+include 'db.php';
 include 'header.php';
 
-// Filtrado por categoría
-$categoria_id = isset($_GET['categoria']) ? (int)$_GET['categoria'] : null;
+// Filtramos si llega una categoría
+$id_categoria = isset($_GET['id_categoria']) ? (int)$_GET['id_categoria'] : null;
 
-// Ordenamos categorías por 'orden'
-usort($categorias, fn($a,$b) => $a['orden'] <=> $b['orden']);
+// Consulta de noticias
+if ($id_categoria) {
+    $sql = "SELECT n.*, c.categoria 
+            FROM noticia n
+            JOIN categoria c ON n.id_categoria = c.id_categoria
+            WHERE c.id_categoria = $id_categoria AND c.activa = 1
+            ORDER BY n.id_noticia DESC";
+} else {
+    $sql = "SELECT n.*, c.categoria 
+            FROM noticia n
+            JOIN categoria c ON n.id_categoria = c.id_categoria
+            WHERE c.activa = 1
+            ORDER BY c.orden, n.id_noticia DESC";
+}
 
-foreach ($categorias as $cat):
-    if (!$cat['activa']) continue;
-    if ($categoria_id && $cat['id'] != $categoria_id) continue;
+$result = $conn->query($sql);
+$noticias = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 ?>
-    <div class="categoria mb-5">
-        <h2 class="mb-3"><?= htmlspecialchars($cat['nombre']) ?></h2>
-        <div class="row">
-            <?php foreach ($noticias as $noticia): ?>
-                <?php if ($noticia['categoria_id'] == $cat['id']): ?>
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title"><?= htmlspecialchars($noticia['titulo']) ?></h5>
-                                <p class="card-text"><?= htmlspecialchars($noticia['parrafo']) ?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </div>
+
+<?php if (empty($noticias)): ?>
+    <div class="alert alert-warning text-center">
+        No hay noticias disponibles.
     </div>
-<?php endforeach; ?>
+<?php else: ?>
+    <div class="row">
+        <?php foreach ($noticias as $noticia): ?>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= htmlspecialchars($noticia['titulo']) ?></h5>
+                        <p class="card-text"><?= nl2br(htmlspecialchars($noticia['parrafo'])) ?></p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <?= htmlspecialchars($noticia['categoria']) ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
 
 <?php include 'footer.php'; ?>
