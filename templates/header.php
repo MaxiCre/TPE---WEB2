@@ -1,9 +1,4 @@
-<?php
-// Cargar categorías activas
-$sql = "SELECT * FROM categoria WHERE activa = 1 ORDER BY orden ASC";
-$result = $conn->query($sql);
-$categorias = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
-?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,8 +20,8 @@ $categorias = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
             <ul class="navbar-nav ms-auto">
                 <?php foreach ($categorias as $cat): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?id_categoria=<?= $cat['id_categoria'] ?>">
-                            <?= htmlspecialchars($cat['categoria']) ?>
+                        <a class="nav-link" href="index.php?id_categoria=<?= $cat->id_categoria?>">
+                            <?= htmlspecialchars($cat->categoria) ?>
                         </a>
                     </li>
                 <?php endforeach; ?>

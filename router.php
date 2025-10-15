@@ -1,6 +1,6 @@
 <?php
-require_once './app/controllers/noticiasController.php';
-require_once './app/controllers/categoriasController.php';
+//require_once './app/controller/NoticiasController.php';
+require_once './app/controller/CategoriasController.php';
 
 /** TABLA DE RUTEO
  * 
@@ -23,11 +23,10 @@ if (!empty( $_GET['action'])) {
 }
 $params = explode('/',$action);
 switch ($params[0]) {
-    /*case 'listar':
-        showTasks();
-        $controller = new TaskController();
-        $controller->showTasks();
-        break;
+    case 'home':
+        $controller = new CategoriasController();
+        $controller->showCategorias();
+        break;/*
     case 'nueva':
         addTask();
         $controller = new TaskController();
