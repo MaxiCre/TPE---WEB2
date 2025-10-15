@@ -20,7 +20,7 @@
             <ul class="navbar-nav ms-auto">
                 <?php foreach ($categorias as $cat): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?id_categoria=<?= $cat->id_categoria?>">
+                        <a class="nav-link" href="mostrarCategoria/<?= $cat->id_categoria?>">
                             <?= htmlspecialchars($cat->categoria) ?>
                         </a>
                     </li>

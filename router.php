@@ -26,9 +26,14 @@ switch ($params[0]) {
     case 'home':
         $controller = new CategoriasController();
         $controller->showCategorias();
-        break;/*
-    case 'nueva':
-        addTask();
+        break;
+    case 'mostrarCategoria':
+       $controller = new CategoriasController();
+        $id = $params[1];
+        $controller->mostrarCategoria($id);
+        break;
+        /*
+    case 'mostrarCategoria':
         $controller = new TaskController();
         $controller->addTask();
         break;

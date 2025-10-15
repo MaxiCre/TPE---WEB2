@@ -14,11 +14,8 @@ include 'footer.php';
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($noticia['titulo']) ?></h5>
-                        <p class="card-text"><?= nl2br(htmlspecialchars($noticia['parrafo'])) ?></p>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <?= htmlspecialchars($noticia['categoria']) ?>
+                        <h5 class="card-title"><?= htmlspecialchars($noticia->titulo) ?></h5>
+                        <p class="card-text"><?= nl2br(htmlspecialchars($noticia->parrafo)) ?></p>
                     </div>
                 </div>
             </div>
