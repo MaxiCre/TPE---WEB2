@@ -15,42 +15,42 @@ class CategoriasController{
     } 
 
     //showCategorias
-    function showCategorias(){
+    function showCategorias($request){
         $categorias= $this->categoriaModel->getAll();
         
-        $this->categoriasView->showCategorias($categorias);
+        $this->categoriasView->showCategorias($categorias,null,$request->user);
     }
-    function mostrarCategoria($id){
-        $noticias= $this->noticiaModel->getNoticiaCategoria($id);
+    function mostrarCategoria($request){
+        $noticias= $this->noticiaModel->getNoticiaCategoria($request->id);
         $categorias= $this->categoriaModel->getAll();
-        $this->categoriasView->showCategorias($categorias,$noticias);
+        $this->categoriasView->showCategorias($categorias,$noticias,$request->user);
     }
-    function removeCategoria($id){
+    function removeCategoria($request){
         // obtengo la tarea que quiero eliminar
-        $categoria = $this->categoriaModel->get($id);
-        $noticias= $this->noticiaModel->getNoticiaCategoria($id);
+        $categoria = $this->categoriaModel->get($request->id);
+        $noticias= $this->noticiaModel->getNoticiaCategoria($request->id);
 
         if ($noticias) {
-            return $this->categoriasView->showError("La categoría con ID = $id ({$categoria->nombre}) no se puede eliminar porque tiene noticias asociadas.");
+            return $this->categoriasView->showError("La categoría con ID = $request->id ({$categoria->nombre}) no se puede eliminar porque tiene noticias asociadas.",$request->user);
         }
     
-        $this->categoriaModel->remove($id);
+        $this->categoriaModel->remove($request->id);
 
         // redirijo al home
         header('Location: ' . BASE_URL);
     
 
     }
-     function agregarCategoria() {
+     function agregarCategoria($request) {
         if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {
-            return $this->categoriasView->showError('Error: falta completar el nombre');
+            return $this->categoriasView->showError('Error: falta completar el nombre',$request->user);
         }
 
         if (!isset($_POST['orden']) || empty($_POST['orden'])) {
-            return $this->categoriasView->showError('Error: falta completar el orden');
+            return $this->categoriasView->showError('Error: falta completar el orden',$request->user);
         }
         if (!isset($_POST['activa'])) {
-            return $this->categoriasView->showError('Error: falta completar activa');
+            return $this->categoriasView->showError('Error: falta completar activa',$request->user);
         }
 
         // obtengo los datos del formulario
@@ -61,26 +61,26 @@ class CategoriasController{
         $id = $this->categoriaModel->insert($nombre, $orden, $activa);
 
         if (!$id) {
-            return $this->categoriasView->showError('Error la insertar tarea');
+            return $this->categoriasView->showError('Error la insertar tarea',$request->user);
         } 
 
         // redirijo al home
-        header('Location: ' . BASE_URL);
+        header('Location: ' . BASE_URL.'home');
     }
-    public  function modificarCategoria() {
+    public  function modificarCategoria($request) {
          if (!isset($_POST['id_categoria']) || empty($_POST['id_categoria'])) {
-            return $this->categoriasView->showError('Error: falta completar el nombre');
+            return $this->categoriasView->showError('Error: falta completar el nombre',$request->user);
         }
 
         if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {
-            return $this->categoriasView->showError('Error: falta completar el nombre');
+            return $this->categoriasView->showError('Error: falta completar el nombre',$request->user);
         }
 
         if (!isset($_POST['orden']) || empty($_POST['orden'])) {
-            return $this->categoriasView->showError('Error: falta completar el orden');
+            return $this->categoriasView->showError('Error: falta completar el orden',$request->user);
         }
         if (!isset($_POST['activa'])) {
-            return $this->categoriasView->showError('Error: falta completar activa');
+            return $this->categoriasView->showError('Error: falta completar activa',$request->user);
         }
         // obtengo los datos del formulario
         $id=$_POST['id_categoria'];

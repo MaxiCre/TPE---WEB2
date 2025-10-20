@@ -2,7 +2,7 @@
 
 class CategoriaView {
 
-    public function showCategorias($categorias,$noticias=null) {
+    public function showCategorias($categorias,$noticias=null,$user=null) {
         $count = count($categorias);
 
         // NOTA: el template va a poder acceder a todas las variables y 
@@ -12,7 +12,7 @@ class CategoriaView {
     }
 
 
-    public function showError($error) {
+    public function showError($error,$user) {
         echo "<h1>$error</h1>";
     }
 }
