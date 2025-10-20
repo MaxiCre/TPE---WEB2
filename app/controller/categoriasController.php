@@ -17,8 +17,8 @@ class CategoriasController{
     //showCategorias
     function showCategorias($request){
         $categorias= $this->categoriaModel->getAll();
-        
-        $this->categoriasView->showCategorias($categorias,null,$request->user);
+        $noticias = $this->noticiaModel->getNoticias();
+        $this->categoriasView->showCategorias($categorias,$noticias,$request->user);
     }
     function mostrarCategoria($request){
         $noticias= $this->noticiaModel->getNoticiaCategoria($request->id);

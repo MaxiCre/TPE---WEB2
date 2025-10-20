@@ -5,7 +5,7 @@ require_once './app/view/NoticiasView.php';
 class NoticiasController {
     private $noticiaModel;
     private $noticiasView;
-    private $categoriaModel;
+    
 
     function __construct() {
         $this->noticiaModel = new NoticiaModel();
@@ -20,13 +20,11 @@ class NoticiasController {
 
     function mostrarNoticia($id) {
         $noticia = $this->noticiaModel->getNoticia($id);
-        $categorias = $this->categoriaModel->getAll();
-
         if (!$noticia) {
             return $this->noticiasView->showError("La noticia con ID = $id no existe.");
         }
 
-        $this->noticiasView->showNoticias($noticia, $categorias);
+        $this->noticiasView->showNoticias($noticia, null);
     }
 
     function removeNoticia($id) {

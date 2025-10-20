@@ -8,14 +8,20 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <?php foreach ($categorias as $cat): ?>
-                    <?php if ($cat->activa == 0) continue; ?>
+                <?php if (isset($categorias) && !empty($categorias)): ?>
+                    <?php foreach ($categorias as $cat): ?>
+                        <?php if ($cat->activa == 0) continue; ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASE_URL . 'mostrarCategoria/' . $cat->id_categoria ?>">
+                                <?= htmlspecialchars($cat->nombre) ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL . 'mostrarCategoria/' . $cat->id_categoria ?>">
-                            <?= htmlspecialchars($cat->nombre) ?>
-                        </a>
+                        <span class="nav-link text-light">No hay categorías disponibles</span>
                     </li>
-                <?php endforeach; ?>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

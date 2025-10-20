@@ -35,8 +35,8 @@ switch ($params[0]) {
     case 'home':
         $controller = new CategoriasController();
         $controller->showCategorias($request);
-        $controller = new NoticiasController();
-        $controller->showNoticias();
+        /*$controller = new NoticiasController();
+        $controller->showNoticias(); llamo ambos getAll en categorias*/
         break;
     case 'mostrarCategoria':
         $controller = new CategoriasController();
