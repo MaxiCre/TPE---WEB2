@@ -1,16 +1,6 @@
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Tandil Noticias</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="index.php">Tandil Noticias</a>
+       <a class="navbar-brand fw-bold" href="<?= BASE_URL ?>">Tandil Noticias</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
             <span class="navbar-toggler-icon"></span>
@@ -19,9 +9,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <?php foreach ($categorias as $cat): ?>
+                    <?php if ($cat->activa == 0) continue; // Omitir categorías inactivas ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="mostrarCategoria/<?= $cat->id_categoria?>">
-                            <?= htmlspecialchars($cat->categoria) ?>
+                        <a class="nav-link" href="mostrarCategoria/<?= $cat->id_categoria ?>">
+                            <?= htmlspecialchars($cat->nombre) ?>
                         </a>
                     </li>
                 <?php endforeach; ?>
@@ -29,5 +20,4 @@
         </div>
     </div>
 </nav>
-
 <div class="container mt-4">

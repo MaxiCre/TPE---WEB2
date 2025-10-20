@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2025 a las 23:47:31
+-- Tiempo de generación: 20-10-2025 a las 02:30:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,18 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categoria` (
   `id_categoria` int(11) NOT NULL,
-  `categoria` text NOT NULL,
-  `orden` int(11) NOT NULL,
-  `activa` tinyint(1) NOT NULL
+  `nombre` varchar(100) NOT NULL,
+  `activa` tinyint(1) NOT NULL,
+  `orden` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`id_categoria`, `categoria`, `orden`, `activa`) VALUES
-(1, 'terror', 1, 0),
-(2, 'suspenso', 2, 0);
+INSERT INTO `categoria` (`id_categoria`, `nombre`, `activa`, `orden`) VALUES
+(3, '', 1, 2),
+(5, '', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -56,6 +56,13 @@ CREATE TABLE `noticia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `noticia`
+--
+
+INSERT INTO `noticia` (`id_noticia`, `titulo`, `parrafo`, `id_categoria`) VALUES
+(1, 'Lorem ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', 3);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -63,8 +70,7 @@ CREATE TABLE `noticia` (
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`id_categoria`),
-  ADD UNIQUE KEY `orden` (`orden`);
+  ADD PRIMARY KEY (`id_categoria`);
 
 --
 -- Indices de la tabla `noticia`
@@ -81,13 +87,13 @@ ALTER TABLE `noticia`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia`
 --
 ALTER TABLE `noticia`
-  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

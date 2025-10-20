@@ -2,19 +2,13 @@
 
 class CategoriaView {
 
-    public function showCategorias($categorias) {
+    public function showCategorias($categorias,$noticias=null) {
         $count = count($categorias);
 
         // NOTA: el template va a poder acceder a todas las variables y 
         // constantes que tienen alcance en esta funcion
-        require_once './templates/index.php';
-    }
-     public function showNoticias($noticias,$categorias) {
-        $count = count($noticias);
-
-        // NOTA: el template va a poder acceder a todas las variables y 
-        // constantes que tienen alcance en esta funcion
-        require_once './templates/index.php';
+       
+        require_once './templates/index.phtml';
     }
 
 

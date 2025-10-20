@@ -23,7 +23,23 @@ class CategoriasController{
     function mostrarCategoria($id){
         $noticias= $this->noticiaModel->getNoticiaCategoria($id);
         $categorias= $this->categoriaModel->getAll();
-        $this->categoriasView->showNoticias($noticias,$categorias);
+        $this->categoriasView->showCategorias($categorias,$noticias);
+    }
+    function removeCategoria($id){
+        // obtengo la tarea que quiero eliminar
+        $categoria = $this->categoriaModel->get($id);
+        $noticias= $this->noticiaModel->getNoticiaCategoria($id);
+
+        if ($noticias) {
+            return $this->categoriasView->showError("La categoría con ID = $id ({$categoria->nombre}) no se puede eliminar porque tiene noticias asociadas.");
+        }
+    
+        $this->categoriaModel->remove($id);
+
+        // redirijo al home
+        header('Location: ' . BASE_URL);
+    
+
     }
     //deleteCategorias
     //addCategorias
