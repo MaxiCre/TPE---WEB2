@@ -35,6 +35,8 @@ switch ($params[0]) {
     case 'home':
         $controller = new CategoriasController();
         $controller->showCategorias($request);
+        $controller = new NoticiasController();
+        $controller->showNoticias();
         break;
     case 'mostrarCategoria':
         $request = (new GuardMiddleware())->run($request);
@@ -59,6 +61,27 @@ switch ($params[0]) {
         $request->id=  $_POST['id_categoria'];
         $controller->modificarCategoria($request);
         break;
+        case 'mostrarNoticia':
+            $controller = new NoticiasController();
+            $id = $params[1];
+            $controller->mostrarNoticia($id);
+            break;
+        case 'eliminarNoticia':
+            $controller = new NoticiasController();
+            $id =  $_POST['id_categoria'];
+            $controller->removeNoticia($id);
+            break;
+        case 'agregarNoticia':
+            $request = (new GuardMiddleware())->run($request);
+            $controller = new NoticiasController();
+            $controller->agregarNoticia($request);
+            break;
+        case'modificarNoticia':
+            $request = (new GuardMiddleware())->run($request);
+            $controller = new NoticiasController();
+            $request->id=  $_POST['id_categoria'];
+            $controller->modificarNoticia($request);
+            break;
     case 'logearse':
         $controller = new AuthController();
         $controller->doLogin($request);
