@@ -1,5 +1,5 @@
 <?php
-//require_once './app/controller/NoticiasController.php';
+require_once './app/controller/NoticiasController.php';
 require_once './app/controller/CategoriasController.php';
 require_once './app/controller/auth.controller.php';
 require_once './app/middlewares/session.middleware.php';
@@ -39,7 +39,6 @@ switch ($params[0]) {
         $controller->showNoticias();
         break;
     case 'mostrarCategoria':
-        $request = (new GuardMiddleware())->run($request);
         $controller = new CategoriasController();
         $request->id= $params[1];
         $controller->mostrarCategoria($request);

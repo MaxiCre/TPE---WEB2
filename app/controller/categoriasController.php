@@ -26,6 +26,7 @@ class CategoriasController{
         $this->categoriasView->showCategorias($categorias,$noticias,$request->user);
     }
     function removeCategoria($request){
+        if($request->user!=null){
         // obtengo la tarea que quiero eliminar
         $categoria = $this->categoriaModel->get($request->id);
         $noticias= $this->noticiaModel->getNoticiaCategoria($request->id);
@@ -38,10 +39,13 @@ class CategoriasController{
 
         // redirijo al home
         header('Location: ' . BASE_URL);
-    
+        }else{
+            $this->categoriasView->showError("no tiene los privilegios",null);
+        }
 
     }
      function agregarCategoria($request) {
+        if($request->user!=null){
         if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {
             return $this->categoriasView->showError('Error: falta completar el nombre',$request->user);
         }
@@ -66,8 +70,12 @@ class CategoriasController{
 
         // redirijo al home
         header('Location: ' . BASE_URL.'home');
+        }else{
+            $this->categoriasView->showError("no tiene los privilegios",null);
+        }
     }
     public  function modificarCategoria($request) {
+        if($request->user!=null){
          if (!isset($_POST['id_categoria']) || empty($_POST['id_categoria'])) {
             return $this->categoriasView->showError('Error: falta completar el nombre',$request->user);
         }
@@ -92,6 +100,9 @@ class CategoriasController{
 
          // redirijo al home
         header('Location: ' . BASE_URL);
+        }else{
+            $this->categoriasView->showError("no tiene los privilegios",null);
+        }
     }
 
     //editCategorias

@@ -47,9 +47,13 @@ class AuthController {
     }
 
     public function logout($request) {
-        session_destroy();
-        header('Location: ' . BASE_URL."home");
-        return;
+        if($request->user!=null){
+            session_destroy();
+            header('Location: ' . BASE_URL);
+            return;
+        }else{
+            header('Location: ' . BASE_URL);
+        }
     }
 
 

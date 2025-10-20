@@ -15,9 +15,7 @@ class NoticiasController {
     // showNoticias
     function showNoticias() {
         $noticias = $this->noticiaModel->getNoticias();
-        $categorias = $this->categoriaModel->getAll();
-
-        $this->noticiasView->showNoticias($noticias, $categorias);
+        $this->noticiasView->showNoticias($noticias, null);
     }
 
     function mostrarNoticia($id) {
@@ -92,7 +90,7 @@ class NoticiasController {
         } 
 
         // redirijo al home
-        header('Location: ' . BASE_URL.'home');
+        header('Location: ' . BASE_URL);
     }
 }
 ?>

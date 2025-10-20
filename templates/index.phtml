@@ -1,7 +1,14 @@
 <?php require 'header.phtml'; ?>
 <?php require 'navbar.phtml'; ?>
+<?php if ($user!=null): ?>
 <?php require 'formCategoria.phtml'; ?>
+<form method="POST" id="logoutForm">
+        <button type="submit" formaction="logout" class="btn btn-danger">Logout</button>
+</form>
+<?php endif; ?>
+<?php if ($user==null): ?>
 <?php require 'form_login.phtml'; ?>
+<?php endif; ?>
 <?php if (empty($noticias)): ?>
     <div class="alert alert-warning text-center mt-4">
         No hay noticias disponibles.

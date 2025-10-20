@@ -15,7 +15,7 @@ class NoticiaModel{
     }
 
     public function getNoticias() {
-        $query = $this->db->prepare('SELECT * FROM noticias');
+        $query = $this->db->prepare('SELECT * FROM noticia');
     
         $query->execute();
     

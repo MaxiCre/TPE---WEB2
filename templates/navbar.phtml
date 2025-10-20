@@ -9,9 +9,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <?php foreach ($categorias as $cat): ?>
-                    <?php if ($cat->activa == 0) continue; // Omitir categorías inactivas ?>
+                    <?php if ($cat->activa == 0) continue; ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="mostrarCategoria/<?= $cat->id_categoria ?>">
+                        <a class="nav-link" href="<?= BASE_URL . 'mostrarCategoria/' . $cat->id_categoria ?>">
                             <?= htmlspecialchars($cat->nombre) ?>
                         </a>
                     </li>
