@@ -41,6 +41,12 @@ switch ($params[0]) {
         $controller = new CategoriasController();
         $controller->agregarCategoria();
         break;
+    case'modificarCategoria':
+        $controller = new CategoriasController();
+        $controller->modificarCategoria();
+        break;
+     default: 
+        echo "404 Page Not Found";
         /*
     case 'mostrarCategoria':
         $controller = new TaskController();

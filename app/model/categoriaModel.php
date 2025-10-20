@@ -39,6 +39,12 @@ class CategoriaModel{
 
         return $this->db->lastInsertId();
     }
+    function modificar($id,$nombre,$orden,$activa) {
+        $query = $this->db->prepare('UPDATE categoria SET nombre = ?, activa = ?, orden = ?  WHERE id_categoria = ?');
+        $query->execute([$nombre, $activa, $orden, $id]);
+    }
+
+
 
 
 }

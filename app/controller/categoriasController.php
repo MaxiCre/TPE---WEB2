@@ -43,14 +43,14 @@ class CategoriasController{
     }
      function agregarCategoria() {
         if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {
-            return $this->view->showError('Error: falta completar el nombre');
+            return $this->categoriasView->showError('Error: falta completar el nombre');
         }
 
         if (!isset($_POST['orden']) || empty($_POST['orden'])) {
-            return $this->view->showError('Error: falta completar el orden');
+            return $this->categoriasView->showError('Error: falta completar el orden');
         }
-        if (!isset($_POST['activa']) || empty($_POST['activa'])) {
-            return $this->view->showError('Error: falta completar activa');
+        if (!isset($_POST['activa'])) {
+            return $this->categoriasView->showError('Error: falta completar activa');
         }
 
         // obtengo los datos del formulario
@@ -61,12 +61,38 @@ class CategoriasController{
         $id = $this->categoriaModel->insert($nombre, $orden, $activa);
 
         if (!$id) {
-            return $this->view->showError('Error la insertar tarea');
+            return $this->categoriasView->showError('Error la insertar tarea');
         } 
 
         // redirijo al home
         header('Location: ' . BASE_URL);
     }
+    public  function modificarCategoria() {
+         if (!isset($_POST['id_categoria']) || empty($_POST['id_categoria'])) {
+            return $this->categoriasView->showError('Error: falta completar el nombre');
+        }
+
+        if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {
+            return $this->categoriasView->showError('Error: falta completar el nombre');
+        }
+
+        if (!isset($_POST['orden']) || empty($_POST['orden'])) {
+            return $this->categoriasView->showError('Error: falta completar el orden');
+        }
+        if (!isset($_POST['activa'])) {
+            return $this->categoriasView->showError('Error: falta completar activa');
+        }
+        // obtengo los datos del formulario
+        $id=$_POST['id_categoria'];
+        $nombre = $_POST['nombre'];
+        $orden = $_POST['orden'];
+        $activa = $_POST['activa'];
+
+        $this->categoriaModel->modificar($id,$nombre,$orden,$activa);
+
+         // redirijo al home
+        header('Location: ' . BASE_URL);
+    }
+
     //editCategorias
-    //showCategoria
 }
