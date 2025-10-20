@@ -41,8 +41,32 @@ class CategoriasController{
     
 
     }
-    //deleteCategorias
-    //addCategorias
+     function agregarCategoria() {
+        if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {
+            return $this->view->showError('Error: falta completar el nombre');
+        }
+
+        if (!isset($_POST['orden']) || empty($_POST['orden'])) {
+            return $this->view->showError('Error: falta completar el orden');
+        }
+        if (!isset($_POST['activa']) || empty($_POST['activa'])) {
+            return $this->view->showError('Error: falta completar activa');
+        }
+
+        // obtengo los datos del formulario
+        $nombre = $_POST['nombre'];
+        $orden = $_POST['orden'];
+        $activa = $_POST['activa'];
+
+        $id = $this->categoriaModel->insert($nombre, $orden, $activa);
+
+        if (!$id) {
+            return $this->view->showError('Error la insertar tarea');
+        } 
+
+        // redirijo al home
+        header('Location: ' . BASE_URL);
+    }
     //editCategorias
     //showCategoria
 }

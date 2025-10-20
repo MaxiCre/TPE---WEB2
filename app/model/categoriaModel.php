@@ -31,6 +31,14 @@ class CategoriaModel{
 
 
     }
+    function insert($nombre, $orden, $activa) {
+        $query = $this->db->prepare("INSERT INTO categoria(nombre, orden, activa) VALUES(?,?,?)");
+        $query->execute([$nombre, $orden, $activa]);
+
+        // var_dump($query->errorInfo());
+
+        return $this->db->lastInsertId();
+    }
 
 
 }

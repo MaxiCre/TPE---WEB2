@@ -37,6 +37,10 @@ switch ($params[0]) {
         $id =  $_POST['id_categoria'];
         $controller->removeCategoria($id);
         break;
+    case 'agregarCategoria':
+        $controller = new CategoriasController();
+        $controller->agregarCategoria();
+        break;
         /*
     case 'mostrarCategoria':
         $controller = new TaskController();
