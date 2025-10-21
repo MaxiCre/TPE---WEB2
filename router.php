@@ -90,7 +90,6 @@ switch ($params[0]) {
         $controller->registrar($request);
         break;
     case 'logout':
-        $request = (new GuardMiddleware())->run($request);
         $controller = new AuthController();
         $controller->logout($request);
         break;

@@ -9,7 +9,7 @@ class UserModel {
     }
 
     public function get($id) {
-        $query = $this->db->prepare('SELECT * FROM usuarios WHERE id = ?');
+        $query = $this->db->prepare('SELECT * FROM usuario WHERE id = ?');
         $query->execute([$id]);
         $user = $query->fetch(PDO::FETCH_OBJ);
 
@@ -17,7 +17,7 @@ class UserModel {
     }
 
     public function getByUser($user) {
-        $query = $this->db->prepare('SELECT * FROM usuarios WHERE usuario = ?');
+        $query = $this->db->prepare('SELECT * FROM usuario WHERE usuario = ?');
         $query->execute([$user]);
         $user = $query->fetch(PDO::FETCH_OBJ);
 
@@ -26,7 +26,7 @@ class UserModel {
     
     public function getAll() {
         // 2. ejecuto la consulta SQL (SELECT * FROM tareas)
-        $query = $this->db->prepare('SELECT * FROM usuarios');
+        $query = $this->db->prepare('SELECT * FROM usuario');
         $query->execute();
 
         // 3. obtengo los resultados de la consulta
@@ -36,7 +36,7 @@ class UserModel {
     }
 
     function insert($name, $password) {
-        $query = $this->db->prepare("INSERT INTO usuarios(usuario, contraseña) VALUES(?,?)");
+        $query = $this->db->prepare("INSERT INTO usuario(usuario, contraseña) VALUES(?,?)");
         $query->execute([$name, $password]);
 
         // var_dump($query->errorInfo());

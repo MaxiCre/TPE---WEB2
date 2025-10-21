@@ -28,7 +28,7 @@ class AuthController {
         if($userFromDB && password_verify($password, $userFromDB->contraseña)) {
             $_SESSION['USER_ID'] = $userFromDB->id;
             $_SESSION['USER_NAME'] = $userFromDB->usuario;
-            header('Location: ' . BASE_URL."home");
+            header('Location: ' . BASE_URL);
             return;
         } else {
             return $this->view->showLogin("Usuario o contraseña incorrecta", $request->user);
@@ -43,7 +43,7 @@ class AuthController {
         $password = password_hash($_POST['password'],PASSWORD_BCRYPT) ;
 
         $this->userModel->insert($user,$password);
-        header('Location: ' . BASE_URL."home");
+        header('Location: ' . BASE_URL);
     }
 
     public function logout($request) {
